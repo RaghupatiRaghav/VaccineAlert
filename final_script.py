@@ -10,13 +10,13 @@ import time
 import sys
 
 #User specified inputs
-age_filter = 45 #possible options = 18, 45, None
-vac_name = "COVISHIELD" #possible options = "COVAXIN", "COVISHIELD", None
+age_filter = 18 #possible options = 18, 45, None
+vac_name = "COVAXIN" #possible options = "COVAXIN", "COVISHIELD", None
 fee_filter = None #possible options = "Free" "Paid" None
-min_slots = 5 #min available slots must be equal to or greater than min_slots for alarm to be raised
+min_slots = 2 #min available slots must be equal to or greater than min_slots for alarm to be raised
 district_id = [141,145,140,146,147,143,148,149,144,150,142] #can specify multiple district ids get district id from cowin platform(see readme for more details)
-hrs = 0 #number of hrs you want the program to run, cannot be None or blank, must be an whole number
-mins = 15 #number of mins you want the program to run, cannot be None or blank, must be an whole number
+hrs = 6 #number of hrs you want the program to run, cannot be None or blank, must be an whole number
+mins = 0 #number of mins you want the program to run, cannot be None or blank, must be an whole number
 open_browser = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" #if you want to automatically open cowin sign in page if conditions are met, specify the browser path here. Else choose None
 
 #prints input for log
@@ -54,7 +54,7 @@ time_left_script = (y*60) + (x*60*60)
 
 #system inputs
 today_date = datetime.today().strftime('%d-%m-%Y')
-print('Fetching data for ' +str(today_date) + ' and the next 7 days' )
+print('Fetching data for ' +str(today_date) + ' and the next 7 days'+'\n' )
 
 #Main Programme
 
@@ -93,6 +93,9 @@ while time_left_script>0:
         
         if df.empty:
             print('No records found for this iteration')
+
+        elif len(df)==0:
+            print('No records found for this iteration')
     
         else:
             #Applying filters
@@ -109,33 +112,39 @@ while time_left_script>0:
             if fee_filter is not None:
                 df_fin = df_fin[df_fin['fee_type']==fee_filter]
             
-            df_fin.reset_index(inplace = True)
-            df_fin.drop(columns={'index'},inplace = True)
+            df_fin = df_fin.reset_index()
+            df_fin = df_fin.drop(columns={'index'})
+            if len(df_fin)>0:
+                df_fin.to_csv(r"slots.csv", index = False)
             
             #opens alarm, prints df_fin and launches webpage
             if len(df_fin)>0:
+                print('Search successful. Open slots.csv for info on the available slots.')
                 subprocess.Popen(['start','success_song.mp3'], shell = True)
-                print(df_fin)
-                if opne_browser is not None:
+                if open_browser is not None:
                     subprocess.Popen([open_browser, r"https://selfregistration.cowin.gov.in/"])
-            
-             
-        
+                subprocess.Popen('slots.csv', shell = True)
+                break
+                    
     except:
-        print('Number of requests exceeded')
+        print('Either you have hit the 100 ceiling for requests in 5 min window or something else is wrong in the main program!')
     
     end_time_iteration = time.time()
     #sleep_time calculates how long we should let the program sleep so that 100 requests can be made in 5 minute window
     sleep_time = ((secs_until_newwin*len(district_id))/requests_left)-(end_time_iteration-start_time_iteration)
+    if sleep_time<0:
+        sleep_time = 0
     print('time_taken to run the batch: ' +str(end_time_iteration-start_time_iteration) + ' seconds') #here, batch means the entire group of district id.
-    print('sleep time: '+str(sleep_time)+ ' seconds')
     secs_until_newwin = secs_until_newwin - sleep_time
     requests_left = requests_left - len(district_id)
-    print('updated secs_until_newwin is ' + str(secs_until_newwin))
-    print('updated requests_left is ' + str(requests_left)+'\n')
+    print('secs_until_newwin: ' + str(secs_until_newwin))
+    print('requests_left: ' + str(requests_left))
     time_left_script = time_left_script-(end_time_iteration-start_time_iteration)-sleep_time
-    time.sleep(sleep_time)
+    print('sleep time: '+str(min(sleep_time,secs_until_newwin))+ ' seconds' + '\n')
+    time.sleep(min(secs_until_newwin,sleep_time))
     
     if sleep_time>secs_until_newwin:
         secs_until_newwin = (5*60)
         requests_left = 100
+               
+print('Script time elapsed, No slots found.')
