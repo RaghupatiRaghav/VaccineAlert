@@ -85,7 +85,6 @@ while time_left_script>0:
             request_response = requests.get(URL, headers = pi)
             dict_req_resp = request_response.json()
             
-            
             for key,value in (dict_req_resp.items()):
                 for element in range(len(value)):
                     for i,j in value[element].items():
@@ -142,11 +141,9 @@ while time_left_script>0:
     print('requests_left: ' + str(requests_left))
     time_left_script = time_left_script-(end_time_iteration-start_time_iteration)-sleep_time
     print('sleep time: '+str(min(sleep_time,secs_until_newwin))+ ' seconds' + '\n')
-    if requests_left < len(district_id):
-        sleep_time = secs_until_newwin
     time.sleep(min(secs_until_newwin,sleep_time))
     
-    if sleep_time>=secs_until_newwin:
+    if sleep_time>secs_until_newwin:
         secs_until_newwin = (5*60)
         requests_left = 100
                
