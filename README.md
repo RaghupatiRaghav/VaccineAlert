@@ -11,21 +11,21 @@ This is a program written in Python3 to alert the user of vaccine slots availabl
 2. Edit the python script using any text editor (such as Notepad). Navigate to ```#User specified inputs section``` in the beginning of the program.
 3. Provide the following inputs:
 
-	-```age_filter``` : Possible options are ```18``` and ```45```. This instructs the program to search for 18-45 and 45+ category respectively.
+  * ```age_filter``` : Possible options are ```18``` and ```45```. This instructs the program to search for 18-45 and 45+ category respectively.
 
-	-```vac_name``` : Possible options are ```"COVAXIN"``` where the search is for Covaxin slots, ```"COVISHIELD"``` where the search is for Covishield slots and None where the search is vaccine agnostic.
+  * ```vac_name``` : Possible options are ```"COVAXIN"``` where the search is for Covaxin slots, ```"COVISHIELD"``` where the search is for Covishield slots and None where the search is vaccine agnostic.
 
-	-```fee_filter``` : Possible options are ```"Free"``` where the program searches for Free slots ```"Paid"``` where it searches for slots that are paid and ```None``` where the search is fee agnostic.
+  * ```fee_filter``` : Possible options are ```"Free"``` where the program searches for Free slots ```"Paid"``` where it searches for slots that are paid and ```None``` where the search is fee agnostic.
 
-	-```min_slots``` : Often, it will not be worth your time to look at the portal if the available slots are abysmally low. This is because such slots tend to fill up very fast when available. You may provide any integer or ```None``` here. The alarm will be raised if minimum available slots are greater than or equal to the specified integer. If ```None``` is specified, however, this filter does not apply.
+  * ```min_slots``` : Often, it will not be worth your time to look at the portal if the available slots are abysmally low. This is because such slots tend to fill up very fast when available. You may provide any integer or ```None``` here. The alarm will be raised if minimum available slots are greater than or equal to the specified integer. If ```None``` is specified, however, this filter does not apply.
 
-	-```district_id``` : You can provide any number of District IDs enclosed in a square bracket. For instance, ```district_id = [141,145,140,146,147,143,148,149,144,150,142]``` will search for all the specified IDs. The aforementioned list of district_id covers all of Delhi. Please visit the [Co-Win portal](https://www.cowin.gov.in/home) if you wish to alter this list for your region.
+  * ```district_id``` : You can provide any number of District IDs enclosed in a square bracket. For instance, ```district_id = [141,145,140,146,147,143,148,149,144,150,142]``` will search for all the specified IDs. The aforementioned list of district_id covers all of Delhi. Please visit the [Co-Win portal](https://www.cowin.gov.in/home) if you wish to alter this list for your region.
 
-	-```hrs``` : Specify the number of hours you want the search to run.
+  * ```hrs``` : Specify the number of hours you want the search to run.
 
-	-```mins``` : Specify the number of minutes you want the search to run.
+  * ```mins``` : Specify the number of minutes you want the search to run.
 
-	-```open_browser``` : Specify the program path for your browser. If ```None``` is specified, the program does not open the login page of the Cowin Portal when all conditions are met.
+  * ```open_browser``` : Specify the program path for your browser. If ```None``` is specified, the program does not open the login page of the Cowin Portal when all conditions are met.
 
 4. Save the script, drag and drop it into a python environment (such as Anaconda Terminal or Bash). 
 5. The program will now run for and will stop either if it finds a matching slot or it exhausts the specified duration of the run.
