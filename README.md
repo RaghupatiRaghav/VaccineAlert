@@ -5,7 +5,7 @@ This is a program written in Python3 to alert the user of vaccine slots availabl
 
 ## Getting Started:
 
-#### Downloading Script:
+### Downloading Script:
 
 1. Clone the repository or directly download files *final_script.py* and *success_song.mp3*.
 2. Edit the python script using any text editor (such as Notepad). Navigate to ```#User specified inputs section``` in the beginning of the program.
@@ -36,7 +36,7 @@ This is a program written in Python3 to alert the user of vaccine slots availabl
 *Note-2* : Government capped the maximum number of pings to CoWin servers to 100 in 5 minutes. The program is therefore optimized to space 100 requests in 5 minutes, depending on the frequency of pings. For instance, if the requests are sent at such a pace that 100 pings will be exhausted in the next 5 minutes, the wait time between these requests increases and vice versa for low pace of requests.   
 
 
-#### Changing alarm sound:
+### Changing alarm sound:
 
 1. After cloning the repository or directly downloading the files, delete the existing file named _'success_song.mp3'_.
 2. Copy paste preferred mp3 file in the same directory as the script *final_script.py*.
