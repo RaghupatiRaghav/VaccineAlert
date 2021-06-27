@@ -11,7 +11,7 @@ This is a program written in Python3 to alert the user of vaccine slots availabl
 2. Edit the python script using any text editor (such as Notepad). Navigate to ```#User specified inputs section``` in the beginning of the program.
 3. Provide the following inputs:
 
-  3. ```age_filter``` : Possible options are ```18``` and ```45```. This instructs the program to search for 18-45 and 45+ category respectively.
+  * ```age_filter``` : Possible options are ```18``` and ```45```. This instructs the program to search for 18-45 and 45+ category respectively.
 
   * ```vac_name``` : Possible options are ```"COVAXIN"``` where the search is for Covaxin slots, ```"COVISHIELD"``` where the search is for Covishield slots and None where the search is vaccine agnostic.
 
