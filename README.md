@@ -1,7 +1,7 @@
 # Vaccine Alert
 
 ## About 
-This is a program written in Python3 to alert the user of vaccine slots available on the [Co-Win portal](https://www.cowin.gov.in/home). In a nutshell, it pings (or asks) the portal for slot information. If the retrieved information is relevant for the user (i.e., slots for a particular vaccine are available as per user's requirements), the program raises a sound alarm and opens up the login page to instantly book the slots. 
+This is a program written in Python3 to alert the user of vaccine slots available on the [Co-Win portal](https://www.cowin.gov.in/home). In a nutshell, it pings (or asks) the portal for slot information. If the retrieved information is relevant for the user, the program raises an alarm and opens up the login page to instantly book the slots. 
 
 ## Getting Started:
 
